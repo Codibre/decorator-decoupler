@@ -16,7 +16,7 @@ export function prepareMetaClass<T>(
 export function applyMetaClass(defaultDecorator?: () => ClassDecorator) {
 	for (const item of MetaClass) {
 		const exceptions = exceptionMap.get(item.target);
-		applyMeta(exceptions, (it, x) => x(it.target), item, defaultDecorator);
+		applyMeta((it, x) => x(it.target), item, defaultDecorator, exceptions);
 	}
 	exceptionMap.clear();
 	MetaClass.clear();

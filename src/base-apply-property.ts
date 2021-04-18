@@ -15,7 +15,7 @@ export function baseApplyProperty<
 	for (const item of params) {
 		const exceptions = map.get(item.target);
 		const methods = exceptions?.get(item.name);
-		applyMeta(methods, callback, item, defaultDecorator);
+		applyMeta(callback, item, defaultDecorator, methods);
 	}
 	params.clear();
 	map.clear();

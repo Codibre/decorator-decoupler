@@ -14,10 +14,10 @@ export function baseApplyMetaParam(
 		const byIndex = exceptions?.get(item.index);
 		const byDecorator = exceptions?.get(item.args[0]);
 		applyMeta(
-			byIndex,
 			(it, x) => x(it.target, it.name, it.index),
 			item,
 			defaultDecorator ? () => defaultDecorator(item.args[0]) : undefined,
+			byIndex,
 			byDecorator,
 		);
 	}
