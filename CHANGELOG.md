@@ -1,5 +1,8 @@
 
-## 0.1.1
+## 0.1.2
+* 6c01f87 fixing code smell
+## v0.1.1
+* 837d60e 0.1.1
 * 2dd82f9 fixing readme
 ## v0.1.0
 * 69143cd 0.1.0
