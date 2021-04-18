@@ -1,13 +1,20 @@
 import { AbstractClass } from 'is-this-a-pigeon';
 import { MetaClass } from './decorators';
+import { getList } from './get-map';
 
-export function applyMetaClass(
-	defaultDecorator: (() => ClassDecorator) | undefined,
-	...exceptions: [AbstractClass, ClassDecorator[]][]
+const exceptionMap = new Map<Object, ClassDecorator[]>();
+
+export function prepareMetaClass<T>(
+	cls: AbstractClass<T>,
+	decorator: ClassDecorator,
 ) {
-	const map = new Map(exceptions);
+	const list = getList(exceptionMap, cls);
+	list.push(decorator);
+}
+
+export function applyMetaClass(defaultDecorator?: () => ClassDecorator) {
 	for (const item of MetaClass) {
-		const exception = map.get(item.target as AbstractClass);
+		const exception = exceptionMap.get(item.target);
 		if (exception) {
 			exception.forEach((x) => x(item.target));
 		} else {

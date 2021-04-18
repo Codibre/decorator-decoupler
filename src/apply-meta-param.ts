@@ -1,20 +1,29 @@
 import { AbstractClass } from 'is-this-a-pigeon';
-import { MetaCtorParam } from './decorators';
+import { MetaParam } from './decorators';
+import { getList, getMap } from './get-map';
 
-export function applyMetaParam(
-	defaultDecorator: (() => ParameterDecorator) | undefined,
-	...exceptions: [AbstractClass, [number, ParameterDecorator[]][]][]
+const exceptionMap = new Map<Object, Map<unknown, ParameterDecorator[]>>();
+
+export function prepareMetaParam<T>(
+	cls: AbstractClass<T>,
+	indexOrDecoratedSymbol: unknown,
+	decorator: ParameterDecorator,
 ) {
-	const map = new Map(exceptions);
-	for (const item of MetaCtorParam) {
-		const ctorParams = map.get(item.target as AbstractClass);
-		if (ctorParams) {
-			const exception = ctorParams.find(([x]) => x === item.index);
-			if (exception) {
-				exception[1].forEach((x) => x(item.target, item.name, item.index));
-				continue;
-			}
+	const map = getMap(exceptionMap, cls);
+	const list = getList(map, indexOrDecoratedSymbol);
+	list.push(decorator);
+}
+
+export function applyMetaParam(defaultDecorator: () => ParameterDecorator) {
+	for (const item of MetaParam) {
+		const exceptions = exceptionMap.get(item.target);
+		const byIndex = exceptions?.get(item.index);
+		const byDecorator = exceptions?.get(item.args[0]);
+		if (byIndex || byDecorator) {
+			byIndex?.forEach((x) => x(item.target, item.name, item.index));
+			byDecorator?.forEach((x) => x(item.target, item.name, item.index));
+		} else {
+			defaultDecorator?.()(item.target, item.name, item.index);
 		}
-		defaultDecorator?.()(item.target, item.name, item.index);
 	}
 }

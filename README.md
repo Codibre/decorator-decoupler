@@ -45,7 +45,19 @@ applyMetaClass(Injectable);
 applyMetaCtorParam(Inject);
 ```
 
-## But why?
+Suppose for a certain class you want to apply a different decorator other than the default one informed in **applyMetaClass**.
+In this case, before calling it, you may call **prepareMetaClass**:
+
+```ts
+prepareMetaClass(MyScopedClass, Injectable({ scope: Scope.Request }));
+applyMetaClass(Injectable);
+```
+
+In the above example, all classes marked with **@MetaClass()** will be marked with **@Injectable()**, except for **MyScopedClass**, that will be marked with **@Injectable({ scope: Scope.Request })**. You may also prepare multiple decorators for the same class, and it'll be applied in order.
+
+There are also prepare methods for each type of decorator.
+
+  ## But why?
 
 The idea here is to totally isolate your core code, where your main structure and business rule is, from infrastructure details.
 In the example above, nestjs is a great framework but is an infrastructure library. If you want to change the controller scheme of your
