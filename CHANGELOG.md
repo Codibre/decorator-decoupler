@@ -1,5 +1,8 @@
 
-## 0.1.0
+## 0.1.1
+* 2dd82f9 fixing readme
+## v0.1.0
+* 69143cd 0.1.0
 * 3c23857 fixing adapters and unit tests
 * 1a90dae Creating prepare methods
 * 8604645 reservating npm package name
