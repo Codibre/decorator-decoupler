@@ -1,6 +1,6 @@
-fluent-iterable - v0.0.1
+fluent-iterable - v0.1.0
 
-# fluent-iterable - v0.0.1
+# fluent-iterable - v0.1.0
 
 ## Table of contents
 
@@ -11,6 +11,7 @@ fluent-iterable - v0.0.1
 - [MetaMethod](README.md#metamethod)
 - [MetaParam](README.md#metaparam)
 - [MetaProperty](README.md#metaproperty)
+- [exceptionMap](README.md#exceptionmap)
 
 ### Functions
 
@@ -19,6 +20,11 @@ fluent-iterable - v0.0.1
 - [applyMetaMethod](README.md#applymetamethod)
 - [applyMetaParam](README.md#applymetaparam)
 - [applyMetaProperty](README.md#applymetaproperty)
+- [prepareMetaClass](README.md#preparemetaclass)
+- [prepareMetaCtorParam](README.md#preparemetactorparam)
+- [prepareMetaMethod](README.md#preparemetamethod)
+- [prepareMetaParam](README.md#preparemetaparam)
+- [prepareMetaProperty](README.md#preparemetaproperty)
 
 ## Variables
 
@@ -30,7 +36,7 @@ ___
 
 ### MetaCtorParam
 
-• `Const` **MetaCtorParam**: *IterableParameterDecorator*<[identifier: unknown]\>
+• `Const` **MetaCtorParam**: *IterableParameterDecorator*<[identifier?: unknown]\>
 
 ___
 
@@ -42,7 +48,7 @@ ___
 
 ### MetaParam
 
-• `Const` **MetaParam**: *IterableParameterDecorator*<[identifier: unknown]\>
+• `Const` **MetaParam**: *IterableParameterDecorator*<[identifier?: unknown]\>
 
 ___
 
@@ -50,18 +56,23 @@ ___
 
 • `Const` **MetaProperty**: *IterablePropertyDecorator*<[]\>
 
+___
+
+### exceptionMap
+
+• `Const` **exceptionMap**: *Map*<Object, Map<string \| number \| symbol, MethodDecorator[]\>\>
+
 ## Functions
 
 ### applyMetaClass
 
-▸ **applyMetaClass**(`defaultDecorator`: () => ClassDecorator \| *undefined*, ...`exceptions`: [AbstractClass, ClassDecorator[]][]): *void*
+▸ **applyMetaClass**(`defaultDecorator?`: () => ClassDecorator): *void*
 
 #### Parameters:
 
-Name | Type |
-:------ | :------ |
-`defaultDecorator` | () => ClassDecorator \| *undefined* |
-`...exceptions` | [AbstractClass, ClassDecorator[]][] |
+| Name | Type |
+| :------ | :------ |
+| `defaultDecorator?` | () => ClassDecorator |
 
 **Returns:** *void*
 
@@ -69,14 +80,13 @@ ___
 
 ### applyMetaCtorParam
 
-▸ **applyMetaCtorParam**(`defaultDecorator`: () => ParameterDecorator \| *undefined*, ...`exceptions`: [AbstractClass, [*number*, ParameterDecorator[]][]][]): *void*
+▸ **applyMetaCtorParam**(`defaultDecorator?`: (`identifier?`: *any*) => ParameterDecorator): *void*
 
 #### Parameters:
 
-Name | Type |
-:------ | :------ |
-`defaultDecorator` | () => ParameterDecorator \| *undefined* |
-`...exceptions` | [AbstractClass, [*number*, ParameterDecorator[]][]][] |
+| Name | Type |
+| :------ | :------ |
+| `defaultDecorator?` | (`identifier?`: *any*) => ParameterDecorator |
 
 **Returns:** *void*
 
@@ -84,14 +94,13 @@ ___
 
 ### applyMetaMethod
 
-▸ **applyMetaMethod**(`defaultDecorator`: () => MethodDecorator \| *undefined*, ...`exceptions`: [AbstractClass, [*string*, MethodDecorator[]][]][]): *void*
+▸ **applyMetaMethod**(`defaultDecorator?`: () => MethodDecorator): *void*
 
 #### Parameters:
 
-Name | Type |
-:------ | :------ |
-`defaultDecorator` | () => MethodDecorator \| *undefined* |
-`...exceptions` | [AbstractClass, [*string*, MethodDecorator[]][]][] |
+| Name | Type |
+| :------ | :------ |
+| `defaultDecorator?` | () => MethodDecorator |
 
 **Returns:** *void*
 
@@ -99,14 +108,13 @@ ___
 
 ### applyMetaParam
 
-▸ **applyMetaParam**(`defaultDecorator`: () => ParameterDecorator \| *undefined*, ...`exceptions`: [AbstractClass, [*number*, ParameterDecorator[]][]][]): *void*
+▸ **applyMetaParam**(`defaultDecorator?`: () => ParameterDecorator): *void*
 
 #### Parameters:
 
-Name | Type |
-:------ | :------ |
-`defaultDecorator` | () => ParameterDecorator \| *undefined* |
-`...exceptions` | [AbstractClass, [*number*, ParameterDecorator[]][]][] |
+| Name | Type |
+| :------ | :------ |
+| `defaultDecorator?` | () => ParameterDecorator |
 
 **Returns:** *void*
 
@@ -114,13 +122,121 @@ ___
 
 ### applyMetaProperty
 
-▸ **applyMetaProperty**(`defaultDecorator`: () => PropertyDecorator \| *undefined*, ...`exceptions`: [AbstractClass, [*string*, PropertyDecorator[]][]][]): *void*
+▸ **applyMetaProperty**(`defaultDecorator?`: () => PropertyDecorator): *void*
 
 #### Parameters:
 
-Name | Type |
-:------ | :------ |
-`defaultDecorator` | () => PropertyDecorator \| *undefined* |
-`...exceptions` | [AbstractClass, [*string*, PropertyDecorator[]][]][] |
+| Name | Type |
+| :------ | :------ |
+| `defaultDecorator?` | () => PropertyDecorator |
+
+**Returns:** *void*
+
+___
+
+### prepareMetaClass
+
+▸ **prepareMetaClass**<T\>(`cls`: *AbstractClass*<T\>, `decorator`: ClassDecorator): *void*
+
+#### Type parameters:
+
+| Name |
+| :------ |
+| `T` |
+
+#### Parameters:
+
+| Name | Type |
+| :------ | :------ |
+| `cls` | *AbstractClass*<T\> |
+| `decorator` | ClassDecorator |
+
+**Returns:** *void*
+
+___
+
+### prepareMetaCtorParam
+
+▸ **prepareMetaCtorParam**<T\>(`cls`: *AbstractClass*<T\>, `indexOrDecoratedSymbol`: *unknown*, `decorator`: ParameterDecorator): *void*
+
+#### Type parameters:
+
+| Name |
+| :------ |
+| `T` |
+
+#### Parameters:
+
+| Name | Type |
+| :------ | :------ |
+| `cls` | *AbstractClass*<T\> |
+| `indexOrDecoratedSymbol` | *unknown* |
+| `decorator` | ParameterDecorator |
+
+**Returns:** *void*
+
+___
+
+### prepareMetaMethod
+
+▸ **prepareMetaMethod**<T\>(`cls`: *AbstractClass*<T\>, `methodName`: *KeysOfType*<T, Func\>, `decorator`: MethodDecorator): *void*
+
+#### Type parameters:
+
+| Name |
+| :------ |
+| `T` |
+
+#### Parameters:
+
+| Name | Type |
+| :------ | :------ |
+| `cls` | *AbstractClass*<T\> |
+| `methodName` | *KeysOfType*<T, Func\> |
+| `decorator` | MethodDecorator |
+
+**Returns:** *void*
+
+___
+
+### prepareMetaParam
+
+▸ **prepareMetaParam**<T\>(`cls`: *AbstractClass*<T\>, `indexOrDecoratedSymbol`: *unknown*, `decorator`: ParameterDecorator): *void*
+
+#### Type parameters:
+
+| Name |
+| :------ |
+| `T` |
+
+#### Parameters:
+
+| Name | Type |
+| :------ | :------ |
+| `cls` | *AbstractClass*<T\> |
+| `indexOrDecoratedSymbol` | *unknown* |
+| `decorator` | ParameterDecorator |
+
+**Returns:** *void*
+
+___
+
+### prepareMetaProperty
+
+▸ **prepareMetaProperty**<T\>(`cls`: *AbstractClass*<T\>, `propertyName`: keyof T, `decorator`: PropertyDecorator): *void*
+
+#### Type parameters:
+
+| Name |
+| :------ |
+| `T` |
+
+#### Parameters:
+
+| Name | Type |
+| :------ | :------ |
+| `cls` | *AbstractClass*<T\> |
+| `propertyName` | keyof T |
+| `decorator` | PropertyDecorator |
 
 **Returns:** *void*
