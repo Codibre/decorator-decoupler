@@ -1,8 +1,10 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { AbstractClass, Func, KeysOfType } from 'is-this-a-pigeon';
+import { baseApplyProperty } from './base-apply-property';
 import { MetaMethod } from './decorators';
 import { getList, getMap } from './get-map';
 
-const exceptionMap = new Map<
+export const exceptionMap = new Map<
 	Object,
 	Map<string | symbol | number, MethodDecorator[]>
 >();
@@ -12,19 +14,13 @@ export function prepareMetaMethod<T>(
 	methodName: KeysOfType<T, Func>,
 	decorator: MethodDecorator,
 ) {
-	const map = getMap(exceptionMap, cls);
+	const map = getMap(exceptionMap, cls.prototype);
 	const list = getList(map, methodName);
 	list.push(decorator);
 }
 
 export function applyMetaMethod(defaultDecorator?: () => MethodDecorator) {
-	for (const item of MetaMethod) {
-		const exceptions = exceptionMap.get(item.target);
-		const methods = exceptions?.get(item.name);
-		if (methods) {
-			methods.forEach((x) => x(item.target, item.name, item.descriptor));
-		} else {
-			defaultDecorator?.()(item.target, item.name, item.descriptor);
-		}
-	}
+	baseApplyProperty(exceptionMap, MetaMethod, defaultDecorator, (item, x) =>
+		x(item.target, item.name, item.descriptor),
+	);
 }

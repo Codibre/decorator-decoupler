@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import {
 	createClassDecorator,
 	createMethodDecorator,
@@ -7,17 +8,17 @@ import {
 
 export const MetaClass = createClassDecorator();
 export const MetaCtorParam = createParameterDecorator<
-	<T>(identifier: T) => void
+	<T>(identifier?: T) => void
 >((item) => {
-	if (item.name !== 'constructor') {
+	if (item.name) {
 		throw new TypeError(
 			'This decorator must only be used in constructor parameters!',
 		);
 	}
 });
-export const MetaParam = createParameterDecorator<<T>(identifier: T) => void>(
+export const MetaParam = createParameterDecorator<<T>(identifier?: T) => void>(
 	(item) => {
-		if (item.name === 'constructor') {
+		if (!item.name) {
 			throw new TypeError(
 				'This decorator must not be used in constructor parameters!',
 			);
@@ -29,8 +30,4 @@ export const MetaMethod = createMethodDecorator((item) => {
 		throw new TypeError('This decorator must only be used in methods!');
 	}
 });
-export const MetaProperty = createPropertyDecorator((item) => {
-	if ((item as Object).hasOwnProperty('descriptor')) {
-		throw new TypeError('This decorator must only be used in properties!');
-	}
-});
+export const MetaProperty = createPropertyDecorator();

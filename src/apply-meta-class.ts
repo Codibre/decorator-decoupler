@@ -1,4 +1,5 @@
 import { AbstractClass } from 'is-this-a-pigeon';
+import { applyMeta } from './apply-meta';
 import { MetaClass } from './decorators';
 import { getList } from './get-map';
 
@@ -14,11 +15,9 @@ export function prepareMetaClass<T>(
 
 export function applyMetaClass(defaultDecorator?: () => ClassDecorator) {
 	for (const item of MetaClass) {
-		const exception = exceptionMap.get(item.target);
-		if (exception) {
-			exception.forEach((x) => x(item.target));
-		} else {
-			defaultDecorator?.()(item.target);
-		}
+		const exceptions = exceptionMap.get(item.target);
+		applyMeta(exceptions, (it, x) => x(it.target), item, defaultDecorator);
 	}
+	exceptionMap.clear();
+	MetaClass.clear();
 }
