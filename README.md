@@ -1,8 +1,8 @@
 [![Actions Status](https://github.com/Codibre/decorator-decoupler/workflows/build/badge.svg)](https://github.com/Codibre/decorator-decoupler/actions)
 [![Actions Status](https://github.com/Codibre/decorator-decoupler/workflows/test/badge.svg)](https://github.com/Codibre/decorator-decoupler/actions)
 [![Actions Status](https://github.com/Codibre/decorator-decoupler/workflows/lint/badge.svg)](https://github.com/Codibre/decorator-decoupler/actions)
-[![Test Coverage](https://api.codeclimate.com/v1/badges/65e41e3018643f28168e/test_coverage)](https://codeclimate.com/github/Codibre/decorator-decoupler/test_coverage)
-[![Maintainability](https://api.codeclimate.com/v1/badges/65e41e3018643f28168e/maintainability)](https://codeclimate.com/github/Codibre/decorator-decoupler/maintainability)
+[![Test Coverage](https://api.codeclimate.com/v1/badges/0697256c4b0d5fce07cc/test_coverage)](https://codeclimate.com/github/Codibre/decorator-decoupler/test_coverage)
+[![Maintainability](https://api.codeclimate.com/v1/badges/0697256c4b0d5fce07cc/maintainability)](https://codeclimate.com/github/Codibre/decorator-decoupler/maintainability)
 [![Packages](https://david-dm.org/Codibre/decorator-decoupler.svg)](https://david-dm.org/Codibre/decorator-decoupler)
 [![npm version](https://badge.fury.io/js/decorator-decoupler.svg)](https://badge.fury.io/js/decorator-decoupler)
 
