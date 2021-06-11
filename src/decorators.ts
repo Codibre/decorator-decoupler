@@ -30,4 +30,4 @@ export const MetaMethod = createMethodDecorator((item) => {
 		throw new TypeError('This decorator must only be used in methods!');
 	}
 });
-export const MetaProperty = createPropertyDecorator();
+export const MetaProperty = createPropertyDecorator<(meta?: unknown) => void>();
