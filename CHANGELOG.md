@@ -1,5 +1,8 @@
 
-## 0.1.2
+## 0.1.3
+* ad6d53e adding meta for property
+## v0.1.2
+* bc89980 0.1.2
 * 6c01f87 fixing code smell
 ## v0.1.1
 * 837d60e 0.1.1

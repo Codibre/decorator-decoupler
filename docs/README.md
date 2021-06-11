@@ -1,6 +1,6 @@
-fluent-iterable - v0.1.2
+fluent-iterable - v0.1.3
 
-# fluent-iterable - v0.1.2
+# fluent-iterable - v0.1.3
 
 ## Table of contents
 
@@ -54,7 +54,7 @@ ___
 
 ### MetaProperty
 
-• `Const` **MetaProperty**: *IterablePropertyDecorator*<[]\>
+• `Const` **MetaProperty**: *IterablePropertyDecorator*<[meta?: unknown]\>
 
 ___
 
